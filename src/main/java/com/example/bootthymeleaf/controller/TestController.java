@@ -31,4 +31,9 @@ public class TestController {
         model.addAttribute("testBoolean", testBoolean);
         return "/contents/home";
     }
+
+    @GetMapping("/view1")
+    public String view1() {
+        return "/contents/view1";
+    }
 }

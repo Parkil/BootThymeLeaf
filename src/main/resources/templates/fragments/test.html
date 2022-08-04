@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="case1 (type, list)" th:assert="${!#strings.isEmpty(type) and !#lists.isEmpty(list)}">
+        <h2>Test Fragment Case1</h2>
+        <h2 th:text="${type}"></h2>
+        <h2 th:text="${#lists.size(list)}"></h2>
+        <table border="1">
+            <tbody>
+                <th:block th:each="row: ${list}">
+                    <tr>
+                        <td th:text="${row.getId()}"></td>
+                        <td th:text="${row.getName()}"></td>
+                        <td th:text="${row.getBookName()}"></td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+    <div th:fragment="case2 (type, message)">
+        <h2>Test Fragment Case2</h2>
+        <h2 th:text="${type}">base1</h2>
+        <h2 th:text="${message}">base2</h2>
+    </div>
+</html>

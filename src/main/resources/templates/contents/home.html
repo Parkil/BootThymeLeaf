@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+
+<th:block layout:fragment="head">
+    <title>Spring Boot</title>
+
+    <!--/* css */-->
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+</th:block>
+<body>
+<!--
+<th:block layout:fragment="header" th:include="@{/fragments/header}"></th:block>
+-->
+
+<!-- th:insert 안에 있는 tag 의 내용으로 header 가 변경된다 -->
+<header th:insert="/fragments/header :: header(~{ :: .header})">
+    <div class="header">
+        <h2>Custom header333</h2>
+    </div>
+</header>
+
+<div layout:fragment="content" class="content">
+    <h2>This is Content</h2>
+    <hr/>
+    <!-- th:text 를 이용하면 xss를 자동으로 막아준다. 다만 th:utext를 쓰게 되면 xss를 막아주지 못한다-->
+    <!--<span th:text="${#strings.equals(param.paramStr, '1')} ? '111' : '222'"></span>-->
+    <table border="1">
+        <thead>
+            <th>id</th>
+            <th>이름</th>
+            <th>책이름</th>
+        </thead>
+        <tbody>
+            <th:block th:each="row: ${list}">
+                <tr>
+                    <td th:text="${row.getId()}"></td>
+                    <td th:text="${row.getName()}"></td>
+                    <td th:text="${row.getBookName()}"></td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+</div>
+
+<!--
+    th:insert - tag body에 fragment를 입력
+    th:replace - tag body의 내용을 fragment로 변경
+
+    th:replace="/fragments/test :: test11111"
+    -> /fragments/test 파일의 th:fragment="test11111"의 내용을 가져와서 replace
+    -> 주의할점은 th:fragment="test11111"가 선언된 tag는 가져오지 않는다
+
+    thymeleaf가 3.0.12 이상되는 버전은 정적 변수(대표적으로 controller model 에서 가져온 변수)
+    를 thymeleaf의 함수에 파라메터로 넣게 되면 오류가 발생한다
+-->
+<div th:replace="${testBoolean} ? ~{/fragments/test :: case1(type='111', list=${list})} : ~{/fragments/test :: case2(type='111', message='22222')}"></div>
+
+<th:block layout:fragment="footer" th:include="@{/fragments/footer}"></th:block>
+</body>
+</html>

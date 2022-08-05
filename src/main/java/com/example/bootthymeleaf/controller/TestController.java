@@ -73,7 +73,6 @@ public class TestController {
 
     }
 
-    //todo dialect 구조에서 동적으로 css나 js를 입력할수 있는 구조 확인
     @GetMapping("/dialect/banner")
     public String dialectBanner() {
         return "/dialect/banner";

@@ -1,11 +1,13 @@
 package com.example.bootthymeleaf.controller;
 
 import com.example.bootthymeleaf.vo.Param;
+import com.example.bootthymeleaf.vo.Tasks;
 import com.example.springbootjsp.vo.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +37,31 @@ public class TestController {
     @GetMapping("/view1")
     public String view1() {
         return "/contents/view1";
+    }
+
+    @GetMapping("/view_default")
+    public String viewDefault() {
+        return "/contents/view_default";
+    }
+
+    @GetMapping("/dialect/list")
+    public String dialectList(Model model) {
+        Tasks t1 = new Tasks(1, "t1", "text1", LocalDateTime.now());
+        Tasks t2 = new Tasks(2, "t2", "text2", LocalDateTime.now());
+        Tasks t3 = new Tasks(3, "t3", "text3", LocalDateTime.now());
+        List<Tasks> list = new ArrayList<>();
+        list.add(t1);
+        list.add(t2);
+        list.add(t3);
+
+        model.addAttribute("tasks", list);
+        return "/dialect/list";
+
+    }
+
+    @GetMapping("/dialect/banner")
+    public String dialectBanner() {
+        return "/dialect/banner";
+
     }
 }

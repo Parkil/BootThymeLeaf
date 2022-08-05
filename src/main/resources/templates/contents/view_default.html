@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ko">
+
+    <!--
+        thymeleaf 파라메터의 값이 들어갈 필요가 없는 경우에는 [_] 를 붙인다
+        <head th:replace="/layout/default_layout :: head(~{this :: title}, _, _)">
+    -->
+    <head th:replace="/layout/default_layout :: head(_, _, _)">
+        <title></title>
+    </head>
+
+    <div th:insert="/layout/default_layout :: header(_)">
+    </div>
+
+    <div th:insert="/layout/default_layout :: content(_)">
+    </div>
+</html>

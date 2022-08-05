@@ -12,10 +12,7 @@ import org.thymeleaf.templateresolver.UrlTemplateResolver;
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
     @Bean
-    public SpringTemplateEngine templateEngine() {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.addTemplateResolver(new UrlTemplateResolver());
-        templateEngine.addDialect(new LayoutDialect());
-        return templateEngine;
+    public LayoutDialect layoutDialect() {
+        return new LayoutDialect();
     }
 }

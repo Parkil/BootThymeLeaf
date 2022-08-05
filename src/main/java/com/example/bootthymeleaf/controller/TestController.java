@@ -14,6 +14,20 @@ import java.util.List;
 @Controller
 public class TestController {
 
+    /*
+    자연이랑 구조
+    header(고정)
+    footer(고정)
+    right(고정)
+    main 부분만 변경
+
+    fragment로 분리할만한 부분
+    - 상품리스트의 상품 정보
+        -> 상품 정보 표시는 큰 영역에서는 비슷하지만 세부사항이 다른 경우가 많아서
+        따로 분리하는게 나을듯
+    - 하단 페이징
+    - 상품리스트의 리스트 (분류/정렬 조건 나오는 부분까지)
+     */
     @GetMapping("/post")
     public String test(Param param, Model model) {
         Post post1 = new Post(1, "lee", "book1");
@@ -59,6 +73,7 @@ public class TestController {
 
     }
 
+    //todo dialect 구조에서 동적으로 css나 js를 입력할수 있는 구조 확인
     @GetMapping("/dialect/banner")
     public String dialectBanner() {
         return "/dialect/banner";

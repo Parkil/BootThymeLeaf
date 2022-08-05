@@ -5,8 +5,12 @@
     layout:decorate="~{/layout/dialect_layout}" lang="ko">
 <head>
     <title>Task List</title>
+    <!-- 해당 페이지에서만 필요한 css,js -->
+    <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet"/>
+    <script th:src="@{/js/sample1.js}"></script>
 </head>
 <body>
+
 <!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
 <div layout:fragment="content">
     <table class="table table-bordered table-striped">

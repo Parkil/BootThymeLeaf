@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.bootthymeleaf.repo.TestRepo">
+    <select id="findList" resultType="Test">
+        SELECT
+            col1,
+            col2,
+            col3,
+            reg_dtm
+        FROM
+            aaabbb
+    </select>
+
+    <select id="findOne" parameterType="String" resultType="Test">
+        SELECT
+            col1,
+            col2,
+            col3,
+            reg_dtm
+        FROM
+            aaabbb
+        WHERE
+            col1 = #{col1}
+    </select>
+</mapper>

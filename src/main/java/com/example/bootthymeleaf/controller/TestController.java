@@ -1,17 +1,18 @@
 package com.example.bootthymeleaf.controller;
 
+import com.example.bootthymeleaf.service.TestService;
 import com.example.bootthymeleaf.vo.Param;
-import com.example.bootthymeleaf.vo.Tasks;
 import com.example.springbootjsp.vo.Post;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class TestController {
 
     /*
@@ -28,6 +29,9 @@ public class TestController {
     - 하단 페이징
     - 상품리스트의 리스트 (분류/정렬 조건 나오는 부분까지)
      */
+
+    private final TestService testService;
+
     @GetMapping("/post")
     public String test(Param param, Model model) {
         Post post1 = new Post(1, "lee", "book1");
@@ -60,6 +64,7 @@ public class TestController {
 
     @GetMapping("/dialect/list")
     public String dialectList(Model model) {
+        /*
         Tasks t1 = new Tasks(1, "t1", "text1", LocalDateTime.now());
         Tasks t2 = new Tasks(2, "t2", "text2", LocalDateTime.now());
         Tasks t3 = new Tasks(3, "t3", "text3", LocalDateTime.now());
@@ -67,8 +72,9 @@ public class TestController {
         list.add(t1);
         list.add(t2);
         list.add(t3);
+         */
 
-        model.addAttribute("tasks", list);
+        model.addAttribute("tasks", testService.getAllList());
         return "/dialect/list";
 
     }
@@ -76,6 +82,5 @@ public class TestController {
     @GetMapping("/dialect/banner")
     public String dialectBanner() {
         return "/dialect/banner";
-
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.example.bootthymeleaf.repo")
+@MapperScan(basePackages = "com.example.bootthymeleaf")
 public class DBConfig {
     @Bean
     public DataSource getMySQLDataSource() {

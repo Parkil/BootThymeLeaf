@@ -73,7 +73,6 @@ public class TestController {
         list.add(t2);
         list.add(t3);
          */
-
         model.addAttribute("tasks", testService.getAllList());
         return "/dialect/list";
 
@@ -81,6 +80,13 @@ public class TestController {
 
     @GetMapping("/dialect/banner")
     public String dialectBanner() {
+        return "/dialect/banner";
+    }
+
+    @GetMapping("/dialect/banner/transaction")
+    public String dialectBannerTransaction() throws Exception{
+        int cnt = testService.transactionTest();
+        System.out.println("cnt : "+cnt);
         return "/dialect/banner";
     }
 }

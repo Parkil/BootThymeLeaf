@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.bootthymeleaf.repo.TestRepo">
-    <select id="findList" resultType="Test">
+    <select id="findList" resultType="com.example.bootthymeleaf.vo.Test">
         SELECT
             col1,
             col2,
@@ -14,7 +14,7 @@
             aaabbb
     </select>
 
-    <select id="findOne" parameterType="String" resultType="Test">
+    <select id="findOne" parameterType="String" resultType="com.example.bootthymeleaf.vo.Test">
         SELECT
             col1,
             col2,
@@ -25,4 +25,21 @@
         WHERE
             col1 = #{col1}
     </select>
+
+    <insert id="add" parameterType="com.example.bootthymeleaf.vo.Test">
+        INSERT INTO aaabbb(col1, col2, col3, reg_dtm) VALUES(
+            #{col1},
+            #{col2},
+            #{col3},
+            now()
+        )
+    </insert>
+
+    <update id="update" parameterType="com.example.bootthymeleaf.vo.Test">
+        UPDATE aaabbb SET
+            col2 = #{col2},
+            col3 = #{col3}
+        WHERE
+            col1 = #{col1}
+    </update>
 </mapper>

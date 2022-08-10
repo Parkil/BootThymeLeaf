@@ -10,4 +10,8 @@ public interface TestRepo {
     List<Test> findList();
 
     Test findOne(String col1);
+
+    int add(Test test);
+
+    int update(Test test);
 }

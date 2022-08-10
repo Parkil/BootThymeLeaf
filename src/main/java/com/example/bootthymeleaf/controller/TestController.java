@@ -89,4 +89,9 @@ public class TestController {
         System.out.println("cnt : "+cnt);
         return "/dialect/banner";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "/dialect/login";
+    }
 }

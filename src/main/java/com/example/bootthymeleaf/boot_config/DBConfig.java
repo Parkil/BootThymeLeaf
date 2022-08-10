@@ -1,4 +1,4 @@
-package com.example.bootthymeleaf.config;
+package com.example.bootthymeleaf.boot_config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.jdbc.DataSourceBuilder;

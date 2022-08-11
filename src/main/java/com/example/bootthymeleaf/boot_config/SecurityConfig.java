@@ -1,19 +1,13 @@
 package com.example.bootthymeleaf.boot_config;
 
-import com.example.bootthymeleaf.spring_security.CustomJdbcUserDetailsManager;
+import com.example.bootthymeleaf.spring_security.CustomJdbcDaoImpl;
 import com.example.bootthymeleaf.spring_security.PlainPasswordEncoder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
@@ -61,9 +55,15 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user1, user2, user3);
     }*/
 
+    /*
     @Bean
-    public UserDetailsManager setDBUser(@Qualifier("getMySQLDataSource") DataSource mysqlDataSource) {
+    public UserDetailsManager jdbcUserDetailManager(@Qualifier("getMySQLDataSource") DataSource mysqlDataSource) {
         return new CustomJdbcUserDetailsManager(mysqlDataSource);
+    }*/
+
+    @Bean
+    public JdbcDaoImpl jdbcDaoImpl(@Qualifier("getMySQLDataSource") DataSource mysqlDataSource) {
+        return new CustomJdbcDaoImpl(mysqlDataSource);
     }
 
     //bean 을 선언하는 순간 password encoder 가 지정된다

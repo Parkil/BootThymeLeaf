@@ -2,7 +2,7 @@ package com.example.bootthymeleaf.vo;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @EqualsAndHashCode
+@RequiredArgsConstructor
 @Getter
 public class UserInfo implements UserDetails {
     private final int idx;
@@ -19,14 +20,9 @@ public class UserInfo implements UserDetails {
     private final String pwd;
     private final LocalDateTime regDtm;
 
-    @Setter
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserInfo(int idx, String userId, String pwd, LocalDateTime regDtm, Collection<? extends GrantedAuthority> authorities) {
-        this.idx = idx;
-        this.userId = userId;
-        this.pwd = pwd;
-        this.regDtm = regDtm;
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
     }
 

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{/layout/dialect_layout}" lang="ko">
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/layout/dialect_layout}" lang="ko">
 <head>
     <title>Task1111 List</title>
     <!-- 해당 페이지에서만 필요한 css,js -->
@@ -13,6 +13,14 @@
 
 <!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
 <div layout:fragment="content">
+    <div>
+        <div>인증정보</div>
+        <div>
+            <p th:text="${#authentication.getPrincipal().pwd}"></p>
+            <br>
+            <p th:text="${#authorization}"></p>
+        </div>
+    </div>
     <table class="table table-bordered table-striped">
         <th:block th:insert="/fragments/thead"/>
         <th:block th:insert="/fragments/tbody :: tbody(listObj=${tasks})"/>

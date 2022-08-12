@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -33,8 +34,15 @@ public class SecurityConfig {
                 .and()
                 .logout()
                 .logoutUrl("/perform_logout")
+                .permitAll()
                 .deleteCookies("JSESSIONID");
                 //.logoutSuccessHandler(logoutSuccessHandler());
+
+
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .maximumSessions(2)
+                .expiredUrl("/login?error=session_expired");
 
         return http.build();
     }
@@ -72,4 +80,9 @@ public class SecurityConfig {
         return new PlainPasswordEncoder();
 //        return new BCryptPasswordEncoder();
     }
+
+    //todo 로그인 세션 유효기간 설정
+    //todo spring security 에서 세션을 사용하는지 확인 필요
+
+
 }

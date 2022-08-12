@@ -21,6 +21,15 @@
             <p th:text="${#authorization}"></p>
         </div>
     </div>
+    <div>
+        <div>session</div>
+        <div>
+            <p th:text="${#session.getAttributeNames()}"/>
+        </div>
+    </div>
+    <div>
+        <div><a th:href="@{/perform_logout}"></a></div>
+    </div>
     <table class="table table-bordered table-striped">
         <th:block th:insert="/fragments/thead"/>
         <th:block th:insert="/fragments/tbody :: tbody(listObj=${tasks})"/>

@@ -16,7 +16,7 @@
     <div>
         <div>인증정보</div>
         <div>
-            <p th:text="${#authentication.getPrincipal().pwd}"></p>
+            <p th:text="${#authentication.getPrincipal()}"></p>
             <br>
             <p th:text="${#authorization}"></p>
         </div>
@@ -24,7 +24,10 @@
     <div>
         <div>session</div>
         <div>
-            <p th:text="${#session.getAttributeNames()}"/>
+            <th:block th:each="attr_name : ${#session.getAttributeNames()}">
+                <p th:text="${attr_name}"/>
+            </th:block>
+            <span th:text='${#session.getAttribute("SPRING_SECURITY_CONTEXT")}'></span>
         </div>
     </div>
     <div>

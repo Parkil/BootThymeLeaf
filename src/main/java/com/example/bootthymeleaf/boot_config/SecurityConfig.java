@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/dialect/list", true)
+                .defaultSuccessUrl("/dialect/insert", true)
                 .failureUrl("/login?error=true")
                 //.failureHandler(authenticationFailureHandler())
                 .and()

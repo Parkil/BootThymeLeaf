@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/layout/dialect_layout}" lang="ko">
+<head>
+    <title>Task1111 List</title>
+    <!-- 해당 페이지에서만 필요한 css,js -->
+    <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet"/>
+    <script th:src="@{/js/sample1.js}"></script>
+</head>
+<body>
+
+<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
+<div layout:fragment="content">
+    <div>
+        <div>인증정보</div>
+        <div>
+            <p th:text="${#authentication.getPrincipal()}"></p>
+            <br>
+            <p th:text="${#authorization}"></p>
+        </div>
+    </div>
+    <div>
+        <div>session</div>
+        <div>
+            <th:block th:each="attr_name : ${#session.getAttributeNames()}">
+                <p th:text="${attr_name}"/>
+            </th:block>
+            <span th:text='${#session.getAttribute("SPRING_SECURITY_CONTEXT")}'></span>
+        </div>
+    </div>
+    <div>
+        <div><a th:href="@{/perform_logout}" th:text="로그아웃"></a></div>
+    </div>
+    <div th:text="${insertVO}">
+
+    </div>
+    <form th:action="@{/dialect/insert}" method="POST" th:object="${insertVO}">
+        <p>
+            <label for="text_value" class="sr-only">text value</label>
+            <input type="text" id="text_value" th:field="*{textValue}" class="form-control" placeholder="일반 값" autofocus/>
+            <span th:if="${#fields.hasErrors('textValue')}" th:errors="*{textValue}"></span>
+        </p>
+        <p>
+            <label for="text_value2" class="sr-only">text value2</label>
+            <input type="text" id="text_value2" th:field="*{textValue2}" class="form-control" placeholder="일반 값2" autofocus/>
+            <span th:if="${#fields.hasErrors('textValue2')}" th:errors="*{textValue2}">error 22222</span>
+        </p>
+        <p>
+            <label for="text_value3" class="sr-only">text value - size limit</label>
+            <input type="text" id="text_value3" th:field="*{textValueSizeLimit}" class="form-control" placeholder="일반 값 - 길이 제한" autofocus/>
+            <span th:if="${#fields.hasErrors('textValueSizeLimit')}" th:errors="*{textValueSizeLimit}">error 33333</span>
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">등록</button>
+    </form>
+</div>
+</body>
+</html>

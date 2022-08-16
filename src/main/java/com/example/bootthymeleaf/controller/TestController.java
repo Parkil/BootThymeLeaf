@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -109,10 +108,11 @@ public class TestController {
     public String execInsert(@Valid InsertVO insertVO, BindingResult bindingResult) {
         System.out.println("insertVO : "+insertVO);
 
-        if(bindingResult.hasErrors()) {
-            System.out.println(bindingResult);
-            return "/dialect/insert";
-        }
+//        if(bindingResult.hasErrors()) {
+//            System.out.println("111 : "+bindingResult);
+//            System.out.println("222 : "+bindingResult.getAllErrors());
+//            return "/dialect/insert";
+//        }
 
         return "/dialect/insert";
     }

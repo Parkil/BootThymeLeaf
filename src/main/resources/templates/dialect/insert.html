@@ -8,6 +8,43 @@
     <!-- 해당 페이지에서만 필요한 css,js -->
     <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet"/>
     <script th:src="@{/js/sample1.js}"></script>
+
+    <script type="text/javascript">
+        const testFunc = () =>  {
+            jQuery.ajax({
+                method: "POST",
+                url: "/rest/insert",
+                dataType: "json",
+                data: {
+                    'textValue' : '',
+                    'textValue2' : '',
+                    'textValueSizeLimit' : ''
+                },
+                success: function (response) {
+                    console.log(response)
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr, ajaxOptions, thrownError)
+                }
+            });
+
+            /*
+            $.ajax({
+                url: '/rest/insert',
+                method: 'POST',
+                contentType : 'application/x-www-form-urlencoded',
+                data : {
+                    'textValue' : '',
+                    'textValue2' : '',
+                    'textValueSizeLimit' : ''
+                }
+            }).done(function(a,b,c,d,e) {
+                console.log('done : ',a,b,c,d,e);
+            }).
+
+             */
+        }
+    </script>
 </head>
 <body>
 
@@ -53,6 +90,7 @@
             <span th:if="${#fields.hasErrors('textValueSizeLimit')}" th:errors="*{textValueSizeLimit}">error 33333</span>
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">등록</button>
+        <a th:onclick="testFunc()">ajax 테스트</a>
     </form>
 </div>
 </body>

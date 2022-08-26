@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{/layout/dialect_layout}" lang="ko">
 <head>
     <title>Banner</title>
 </head>
 <body>
+
 <!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
 <div layout:fragment="content">
+    <div>
+        <div>
+            <div sec:authorize="isAuthenticated()" style="background-color:pink; padding:1em;">
+                <div>인증정보</div>
+                <div>
+                    <p th:text="${#authentication.getDetails()}"></p>
+                    <br>
+                    <p th:text="${#authorization.getAuthentication().getPrincipal()}"></p>
+                </div>
+
+                <th:block th:each="attr_name : ${#session.getAttributeNames()}">
+                    <p th:text="${attr_name}"></p>
+                </th:block>
+
+                <span th:text='${#session.getAttribute("SPRING_SECURITY_CONTEXT")}'></span>
+            </div>
+        </div>
+    </div>
+
     Banner Area
 </div>
 

@@ -1,12 +1,13 @@
 package com.example.bootthymeleaf.boot_config;
 
 import com.example.bootthymeleaf.spring_security.CustomJdbcDaoImpl;
+import com.example.bootthymeleaf.spring_security.CustomOAuth2UserService;
 import com.example.bootthymeleaf.spring_security.PlainPasswordEncoder;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -14,10 +15,14 @@ import org.springframework.security.web.SecurityFilterChain;
 import javax.sql.DataSource;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
     public SecurityFilterChain setHttpSecurity(final HttpSecurity http) throws Exception {
+        /*
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
@@ -44,6 +49,20 @@ public class SecurityConfig {
                 .maximumSessions(2)
                 .expiredUrl("/login?error=session_expired");
 
+        return http.build();
+        <a href="/oauth2/authorization/naver">Naver</a>
+         */
+
+        //loginProcessingUrl 을 [/] 로 지정 할 경우 이상한 url이 호출되는 경우가 있다
+        http.authorizeRequests()
+                .antMatchers("/login*").permitAll()
+                .antMatchers("/login/oauth2/code/*").permitAll()
+                .antMatchers("/").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().loginPage("/login").loginProcessingUrl("/perform_login").defaultSuccessUrl("/dialect/banner")
+                .and()
+                .oauth2Login().loginPage("/login").defaultSuccessUrl("/dialect/banner").userInfoEndpoint().userService(customOAuth2UserService);
         return http.build();
     }
 
@@ -73,6 +92,11 @@ public class SecurityConfig {
     public JdbcDaoImpl jdbcDaoImpl(@Qualifier("getMySQLDataSource") DataSource mysqlDataSource) {
         return new CustomJdbcDaoImpl(mysqlDataSource);
     }
+
+//    @Bean
+//    public CustomOAuth2UserService customOAuth2UserService() {
+//        return new CustomOAuth2UserService();
+//    }
 
     //bean 을 선언하는 순간 password encoder 가 지정된다
     @Bean

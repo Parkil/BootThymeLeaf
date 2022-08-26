@@ -116,4 +116,9 @@ public class TestController {
 
         return "/dialect/insert";
     }
+
+    @GetMapping("/")
+    public String index() {
+        return "/dialect/banner";
+    }
 }

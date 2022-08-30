@@ -4,9 +4,16 @@
       layout:decorate="~{/layout/dialect_layout}" lang="ko">
 <head>
     <title>Banner</title>
+
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $('#test').load('/fragment/list', () => {
+                console.log('load complete')
+            })
+        })
+    </script>
 </head>
 <body>
-
 <!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
 <div layout:fragment="content">
     <div>
@@ -25,10 +32,13 @@
 
                 <span th:text='${#session.getAttribute("SPRING_SECURITY_CONTEXT")}'></span>
             </div>
+
+            <div sec:authorize-expr="!isAuthenticated()">
+                not login
+            </div>
         </div>
     </div>
-
-    Banner Area
+    <div id="test"></div>
 </div>
 
 </body>

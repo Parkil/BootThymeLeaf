@@ -82,6 +82,21 @@ public class TestController {
 
     }
 
+    @GetMapping("/fragment/list")
+    public String fragmentList(Model model) {
+        /*
+        Tasks t1 = new Tasks(1, "t1", "text1", LocalDateTime.now());
+        Tasks t2 = new Tasks(2, "t2", "text2", LocalDateTime.now());
+        Tasks t3 = new Tasks(3, "t3", "text3", LocalDateTime.now());
+        List<Tasks> list = new ArrayList<>();
+        list.add(t1);
+        list.add(t2);
+        list.add(t3);
+         */
+        model.addAttribute("tasks", testService.getAllList());
+        return "/fragments/frag_list :: frag_list";
+    }
+
     @GetMapping("/dialect/banner")
     public String dialectBanner() {
         return "/dialect/banner";
@@ -118,7 +133,8 @@ public class TestController {
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index() throws InterruptedException {
+//        Thread.sleep(2000);
         return "/dialect/banner";
     }
 }

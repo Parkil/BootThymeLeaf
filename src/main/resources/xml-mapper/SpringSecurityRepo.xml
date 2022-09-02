@@ -15,4 +15,16 @@
         WHERE
             user_id = #{user_id}
     </select>
+
+    <select id="findByUserId" resultType="com.example.bootthymeleaf.vo.UserInfo">
+        SELECT
+            idx,
+            user_id,
+            pwd,
+            reg_dtm
+        FROM
+            user_info
+        WHERE
+            user_id = #{user_id}
+    </select>
 </mapper>

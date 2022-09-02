@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface SpringSecurityRepo {
     List<UserDetails> findListByUserId(String userId);
+
+    UserDetails findByUserId(String userId);
 }

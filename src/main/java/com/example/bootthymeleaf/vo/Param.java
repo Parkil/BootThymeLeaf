@@ -9,4 +9,8 @@ import lombok.ToString;
 @ToString
 public class Param {
     private String paramStr;
+
+    public void postConstruct() {
+
+    }
 }
